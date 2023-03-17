@@ -1,0 +1,42 @@
+---
+import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
+import {
+  getPosts,
+  getRankedPosts,
+  getAllTags,
+  getNumberOfPages,
+} from '../lib/notion/client.ts'
+import Layout from '../layouts/Layout.astro'
+import BlogPostsLink from '../components/BlogPostsLink.astro'
+import BlogTagsLink from '../components/BlogTagsLink.astro'
+import styles from '../styles/blog.module.css'
+
+const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
+  getPosts(NUMBER_OF_POSTS_PER_PAGE),
+  getRankedPosts(),
+  getAllTags(),
+  getNumberOfPages(),
+])
+---
+
+<Layout>
+  <div slot="main" class={styles.main}>
+    {
+      (
+        <div>
+          <h2>About</h2>
+          <p>Mac関連のこと、日常的な事などを書いていきます。</p>
+          <p>最近は病気の事とレザークラフトのことが多いです。</p>
+          <p>時々更新のブログ。</p>
+        </div>
+      )
+    }
+
+    <footer></footer>
+  </div>
+
+  <div slot="aside" class={styles.aside}>
+    <BlogPostsLink heading="Recommended" posts={rankedPosts} />
+    <BlogTagsLink heading="Categories" tags={tags} />
+  </div>
+</Layout>

@@ -43,7 +43,7 @@ if (database.Icon && database.Icon.Type === 'file') {
   }
 }
 
-const asidePaddingTop = coverImageURL ? '200px' : '60px'
+const asidePaddingTop = coverImageURL ? '200px' : '30px'
 ---
 
 <!DOCTYPE html>
@@ -130,6 +130,21 @@ const asidePaddingTop = coverImageURL ? '200px' : '60px'
       </main>
 
       <aside>
+        <div>
+          <h1 class="logo">
+            <a href="/">
+              <img src="/Logo.png" alt="dev.nuovotaka" />
+            </a>
+          </h1>
+          <nav class="nav-link">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="//nuovotaka.com">Nuovotaka</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+            </ul>
+          </nav>
+        </div>
         <slot name="aside" />
       </aside>
     </div>
@@ -146,6 +161,7 @@ const asidePaddingTop = coverImageURL ? '200px' : '60px'
   .container {
     display: flex;
     min-height: 100vh;
+    align-items: flex-start;
   }
   @media (max-width: 640px) {
     .container {
@@ -167,6 +183,9 @@ const asidePaddingTop = coverImageURL ? '200px' : '60px'
   aside {
     order: 1;
     width: 300px;
+    height: 100dvh;
+    position: sticky;
+    top: 0;
     padding: var(--asidePaddingTop) 20px 20px;
     background-color: #f4f4f4;
   }
@@ -176,6 +195,16 @@ const asidePaddingTop = coverImageURL ? '200px' : '60px'
       width: 100%;
       padding: 40px 20px 20px;
     }
+  }
+
+  .logo img {
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+  }
+
+  .nav-link ul {
+    list-style-type: none;
   }
 
   div.cover {
