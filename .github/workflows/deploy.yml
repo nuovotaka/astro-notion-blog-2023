@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   schedule:
-    - cron: '0 8 * * *' # 毎日08:00 UTC
+    - cron: '0 8 */3 * *' # 3日毎 08:00 UTC
   workflow_dispatch:
 
 jobs:
