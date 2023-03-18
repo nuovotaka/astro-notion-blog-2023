@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon'
+
+const navItems: NavItem[] = [
+  { label: 'Home', path: '/', icon: 'mdi:house' },
+  { label: 'NUOVOTAKA', path: 'https://nuovotaka.com', icon: 'ph:link' },
+  { label: 'About', path: '/about', icon: 'ic:baseline-person' },
+  {
+    label: 'Privacy',
+    path: '/privacy',
+    icon: 'ic:outline-privacy-tip',
+  },
+]
+---
+
+<div class="footer-nav-link">
+  <ul>
+    {
+      navItems.map(({ path, icon }) => (
+        <li>
+          <a href={path}>
+            <Icon name={icon} size={40} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .footer-nav-link {
+    display: block;
+    text-align: center;
+  }
+  @media (max-width: 428px) {
+    .footer-nav-link {
+      margin-bottom: 50px;
+    }
+  }
+  @media (min-width: 429px) {
+    .footer-nav-link {
+      display: none;
+    }
+  }
+
+  .footer-nav-link ul {
+    list-style: none;
+    font-size: 20px;
+    line-height: 0.9rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    border-top: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    z-index: 30;
+    opacity: 70%;
+  }
+  .footer-nav-link ul li {
+    display: inline-block;
+    padding-top: 5px;
+    width: 25%;
+  }
+</style>
