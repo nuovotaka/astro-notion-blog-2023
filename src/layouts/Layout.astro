@@ -143,6 +143,12 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
               <li><a href="/about">About</a></li>
               <li><a href="/privacy">Privacy</a></li>
             </ul>
+            <div class="dark-theme">
+              <div class="check">
+                <input type="checkbox" id="switch" name="theme" />
+                <label for="switch"></label>
+              </div>
+            </div>
           </nav>
         </div>
         <slot name="aside" />
@@ -186,7 +192,8 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
     position: sticky;
     top: 0;
     padding: var(--asidePaddingTop) 20px 20px;
-    background-color: #f4f4f4;
+    color: var(--aside-color);
+    background-color: var(--aside-bg);
   }
   @media (max-width: 640px) {
     aside {
@@ -204,6 +211,28 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
 
   .nav-link ul {
     list-style-type: none;
+  }
+  @media (max-width: 640px) {
+    .logo img {
+      display: none;
+    }
+    .nav-link ul {
+      display: none;
+    }
+  }
+
+  .dark-theme {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px 0px 0px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.1);
   }
 
   div.cover {
@@ -230,7 +259,7 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
   }
   main header h1 {
     font-weight: 700;
-    color: #333;
+    color: var(--fg);
   }
   main header h1 a {
     display: block;
@@ -281,6 +310,32 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
     color: inherit;
     text-decoration: underline;
   }
+
+  .check {
+    position: relative;
+  }
+  input[type='checkbox'] {
+    height: 50px;
+    width: 70px;
+    border-radius: 30px;
+    -webkit-appearance: none;
+    outline: none;
+    /* background: white; */
+    transition: 0.6s ease;
+    cursor: pointer;
+  }
+  input[type='checkbox']::after {
+    content: url('https://api.iconify.design/ph/sun.svg?color=%23fb923c&width=35&height=35');
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+  input[type='checkbox']:checked::after {
+    content: url('https://api.iconify.design/ph/moon.svg?color=white&width=35&height=35');
+    position: absolute;
+    top: 10px;
+    right: 18px;
+  }
 </style>
 
 <style is:global>
@@ -292,6 +347,7 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
 
     --bg: #fff;
     --fg: #333;
+    --list-color: #222;
     --accents-1: #666;
     --accents-2: #666;
     --accents-3: #666;
@@ -310,6 +366,28 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
   * {
     box-sizing: border-box;
     word-break: break-word;
+  }
+
+  html[data-theme='dark'] {
+    --bg: #333;
+    --fg: #fff;
+    --aside-color: #ddd;
+    --aside-bg: #232323;
+    --code: #333;
+    --accents-3: #ddd;
+    --listitem-color: #ddd;
+    --bookmark-border: rgba(255, 255, 255, 0.608);
+  }
+
+  html[data-theme='light'] {
+    --bg: #fff;
+    --fg: #333;
+    --aside-color: #000;
+    --aside-bg: #f4f4f4;
+    --code: #333;
+    --accents-3: #666;
+    --listitem-color: #222;
+    --bookmark-border: rgba(55, 53, 47, 0.16);
   }
 
   html,
@@ -403,14 +481,14 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
   }
 
   ol {
-    color: #222;
+    color: var(--listitem-color);
     font-weight: 400;
     font-size: 0.9rem;
     line-height: 1.8rem;
   }
   p,
   ul {
-    color: #222;
+    color: var(--listitem-color);
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.8rem;
@@ -448,7 +526,7 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
   }
 
   table {
-    color: #222;
+    color: var(--listitem-color);
     border-collapse: collapse;
   }
 
@@ -469,3 +547,40 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
     line-height: 1.2rem;
   }
 </style>
+
+<script is:inline>
+  const osDark = window.matchMedia('(prefers-color-scheme: dark)')
+  const modeSwitch = document.getElementById('switch')
+  function darkModeOn() {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    modeSwitch.checked = true
+  }
+  function darkModeOff() {
+    document.documentElement.setAttribute('data-theme', 'light')
+    modeSwitch.checked = false
+  }
+  const listener = (event) => {
+    if (event.matches) {
+      darkModeOn()
+    } else {
+      darkModeOff()
+    }
+  }
+  osDark.addEventListener('change', listener)
+  listener(osDark)
+  modeSwitch.addEventListener('change', () => {
+    if (modeSwitch.checked) {
+      darkModeOn()
+      style = 'dark'
+    } else {
+      darkModeOff()
+      style = 'light'
+    }
+    localStorage.setItem('data-theme', style)
+  })
+  if (localStorage.getItem('data-theme') === 'dark') {
+    darkModeOn()
+  } else if (localStorage.getItem('data-theme') === 'light') {
+    darkModeOff()
+  }
+</script>
