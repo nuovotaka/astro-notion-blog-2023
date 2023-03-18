@@ -51,7 +51,7 @@ for (let i = startPage; i <= endPage; i++) {
     height: 3rem;
     margin: 0 0.4rem;
     border-radius: var(--radius);
-    background: #f4f4f4;
+    background: var(--pagination-bg);
     color: inherit;
     font-size: 0.85rem;
     text-align: center;
@@ -60,10 +60,10 @@ for (let i = startPage; i <= endPage; i++) {
     line-height: 3rem;
   }
   .pagination a:hover:not(.inactive) {
-    background: #ddd;
+    background: var(--pagination-hover);
   }
   .pagination a.inactive {
-    color: #999;
+    color: var(--pagination-active);
     text-decoration: none;
   }
 </style>
