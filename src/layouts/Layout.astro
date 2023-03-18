@@ -4,6 +4,7 @@ import { getDatabase } from '../lib/notion/client.ts'
 import { getNavLink, getStaticFilePath, filePath } from '../lib/blog-helpers.ts'
 import '../styles/syntax-coloring.css'
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
+import FooterNavLink from '../components/FooterNavLink.astro'
 
 export interface Props {
   title: string
@@ -120,6 +121,13 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
 
           <footer>
             <div>
+              © Copyright
+              {' '}
+              {new Date().getFullYear()}
+              {' '}
+              {siteTitle}
+            </div>
+            <div>
               <span>Powered by</span>
               <a href="https://github.com/otoyo/astro-notion-blog"
                 >astro-notion-blog</a
@@ -153,6 +161,7 @@ const asidePaddingTop = coverImageURL ? '200px' : '30px'
         </div>
         <slot name="aside" />
       </aside>
+      <FooterNavLink />
     </div>
 
     {
