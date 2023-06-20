@@ -60,7 +60,7 @@ The blog is generated statically by [Astro](https://astro.build/) so very fast.
 
 <img src="https://user-images.githubusercontent.com/1063435/213967061-06f488fe-0b42-40a5-8f19-ac441f0168ff.png" width="400">
 
-<img src="https://user-images.githubusercontent.com/1063435/213967200-6d497b44-f26f-4ad7-8cf9-1780cf5cd2e0.png" width="600">
+<img src="https://github.com/otoyo/astro-notion-blog/assets/1063435/bc1ceef1-d67a-490b-b465-34af1b0f8010" width="600">
 
 11. Click the "Save and Deploy" button, then your Notion Blog will be published after deploy
 
