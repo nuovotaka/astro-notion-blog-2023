@@ -55,7 +55,7 @@ The blog is generated statically by [Astro](https://astro.build/) so very fast.
 10. In "Build settings" section,
     1. Select "Astro" as "Framework preset"
     2. Open "Environment Variables (advanced)" and set `NODE_VERSION`, `NOTION_API_SECRET` and `DATABASE_ID`
-       - `NODE_VERSION` is `v16.13.0` or higher
+       - `NODE_VERSION` is `v18.16.0` or higher
        - [How to deploy a site with Git](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-a-site-with-git) is helpful
 
 <img src="https://user-images.githubusercontent.com/1063435/213967061-06f488fe-0b42-40a5-8f19-ac441f0168ff.png" width="400">
@@ -71,7 +71,7 @@ Deploy manually from the Cloudflare Pages dashboard or use a scheduled deploy us
 
 ### Additional requirements
 
-- Node.js v16 or higher
+- Node.js v18 or higher
 - [Yarn](https://yarnpkg.com/getting-started)
 
 ### Steps
